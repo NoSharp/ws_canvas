@@ -1,12 +1,10 @@
 /*
- * This is index.js
- * Start by modifying the id function to return
- * information about you, then open index.html to check what
- * else you have to do, adding functions to the end of this
- * file as necessary.
- *
- * NB: all code you write this year should use strict mode, so
- * we've enabled that by default with the first line of code.
+* This is index.js
+* open `index.html` in a browser to see which tests fail.
+* Edit this file: improving and adding code until all the tests pass.
+* Check `test.js` to see each test that you need to work on.
+* Notice that test tasks are all visual so you
+* need to manually inspect the results.
  */
 
 'use strict';
