@@ -13,7 +13,7 @@
 // draws a stick figure on the canvas
 // the stick figure will stand over the point X,Y (default: 100,150)
 // facing is a degree in which the stick figure is facing: 0 is to the right, 90 is towards us
-function drawStickFigure(el, x, y, facing) {
+function drawStickFigure(el, x, y, facing, legRot) {
   const c = el.getContext("2d");
 
   // set our drawing style
@@ -26,7 +26,7 @@ function drawStickFigure(el, x, y, facing) {
   if (y == null) y = 150;
 
   // the arms and the legs look the same
-  drawLimbs(c, x, y)            // legs
+  drawLimbs(c, x, y, true)            // legs
   drawLimbs(c, x, y-40)         // arms
 
   // body is just a line
@@ -38,9 +38,9 @@ function drawStickFigure(el, x, y, facing) {
 
 
   // helpful functions start here
-  function drawLimbs(c, x, y) {
-    line(c, x-20, y, x, y-40)
-    line(c, x+20, y, x, y-40)
+  function drawLimbs(c, x, y, legs) {
+    line(c, x-20, y + (legs ? legRot : 0), x, y-40)
+    line(c, x+20, y + (legs ? legRot : 0), x, y-40)
   }
 
   function drawFace(c, x, y, facing) {
@@ -101,3 +101,16 @@ function drawStickFigure(el, x, y, facing) {
   }
 
 }
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let i = 0;
+let decrementing = false;
+setInterval(()=>{
+  if(i >= 100 && !decrementing) decrementing = true;
+  if(i <= 0 && decrementing) decrementing = false;
+  i = decrementing ? i - 5 : i + 5;
+
+  ctx.clearRect(0, 0, 1000, 1000);
+  drawStickFigure(canvas, 45 + i, 150 + 10 * Math.sin(i/ 25), 90, -(i/100 * 40));
+}, 1000/30)
